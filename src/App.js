@@ -5,6 +5,8 @@ import Questions from './components/questions';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 
 export default function App() {
+
+  // state declarations
   const [dark, setDark] = React.useState(false);
   const [started, setStarted] = React.useState(false);
   const [flip, setFlip] = React.useState(false);
@@ -20,15 +22,28 @@ export default function App() {
   });
   const [quizFinished, setQuizFinished] = React.useState(false);
 
+  // shuffles items in an array
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  // toggles dark state
   function toggleDarkMode() {
     setDark((prev) => !prev);
   }
 
+  // starts the quiz
   function toggleQuiz() {
     setStarted(true);
     setFlip((prev) => !prev);
     setLoading(true);
     setQuizFinished(false);
+
+    // resets the user's picked answers
     setUserAnswers({
       question1: '',
       question2: '',
@@ -38,6 +53,7 @@ export default function App() {
     });
   }
 
+  // fetches questions when flip state is changed
   React.useEffect(() => {
     fetch('https://opentdb.com/api.php?amount=5&type=multiple&encode=base64')
       .then((res) => res.json())
@@ -47,6 +63,7 @@ export default function App() {
       });
   }, [flip]);
 
+  // shuffles the answers order when new questions are fetched
   React.useEffect(() => {
     setAnswers(
       triviaData.map((item) => {
@@ -55,6 +72,7 @@ export default function App() {
     );
   }, [triviaData]);
 
+  // maps through fetched data and fills question and answers in object
   const questionsData = triviaData.map((item, index) => {
     return {
       question: atob(item.question),
@@ -63,14 +81,7 @@ export default function App() {
     };
   });
 
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
+  // sets an answer as the picked answer when it is clicked
   function handleClick(event) {
     const { name, id } = event.target;
     quizFinished

@@ -2,44 +2,51 @@ import React from 'react';
 import { nanoid } from 'nanoid';
 
 export default function Questions(props) {
+
+  // checks correct answers if all questions are answered
   function checkAnswers() {
     Object.values(props.userAnswers).includes('')
       ? alert('Answer all the questions before checking')
       : props.setQuizFinished(true);
   }
 
+  // creates questions components
   const questionComponent = props.data.map((item, index) => {
+    
     let classes = props.darkMode
       ? 'questions--question dark--mode'
       : 'questions--question';
+      
+    // creates questions elements
     const question = (
       <h2 className={classes}>
         {index + 1}. {item.question}
       </h2>
     );
 
-    const answers = item.allAnswers.map((answer) => {
-      const answerDecoded = atob(answer);
+    // creates answers elements
+    const answers = item.allAnswers.map((answerEncrypted) => {
+      const answer = atob(answerEncrypted);
       const name = `question${index + 1}`;
       let classes = props.darkMode
         ? 'questions--answer dark--mode'
         : 'questions--answer';
       if (props.quizFinished) {
-        if (answerDecoded === item.correctAnswer) {
+        if (answer === item.correctAnswer) {
           classes += ' correct';
-        } else if (answerDecoded === props.userAnswers[name]) {
+        } else if (answer === props.userAnswers[name]) {
           classes += ' wrong';
         }
-      } else if (answerDecoded === props.userAnswers[name]) {
+      } else if (answer === props.userAnswers[name]) {
         classes += ' picked';
       }
 
       return (
-        <label key={nanoid()} className={classes} htmlFor={answerDecoded}>
-          {answerDecoded}
+        <label key={nanoid()} className={classes} htmlFor={answer}>
+          {answer}
           <input
             type="radio"
-            id={answerDecoded}
+            id={answer}
             name={name}
             onClick={props.handleClick}
           />
