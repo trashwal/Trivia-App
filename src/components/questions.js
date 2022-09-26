@@ -1,8 +1,8 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
+import { FiChevronLeft } from 'react-icons/fi'
 
 export default function Questions(props) {
-
   // checks correct answers if all questions are answered
   function checkAnswers() {
     Object.values(props.userAnswers).includes('')
@@ -10,21 +10,20 @@ export default function Questions(props) {
       : props.setQuizFinished(true);
   }
 
-  // creates questions components
+  // creating question components
   const questionComponent = props.data.map((item, index) => {
-    
     let classes = props.darkMode
       ? 'questions--question dark--mode'
       : 'questions--question';
-      
-    // creates questions elements
+
+    // creating question element
     const question = (
       <h2 className={classes}>
         {index + 1}. {item.question}
       </h2>
     );
 
-    // creates answers elements
+    // creating answer elements
     const answers = item.allAnswers.map((answerEncrypted) => {
       const answer = atob(answerEncrypted);
       const name = `question${index + 1}`;
@@ -45,7 +44,7 @@ export default function Questions(props) {
         <label key={nanoid()} className={classes} htmlFor={answer}>
           {answer}
           <input
-            type="radio"
+            type='radio'
             id={answer}
             name={name}
             onClick={props.handleClick}
@@ -55,9 +54,9 @@ export default function Questions(props) {
     });
 
     return (
-      <div key={nanoid()} className="questions--question-component">
+      <div key={nanoid()} className='questions--question-component'>
         {question}
-        <div className="questions--answers-container">{answers}</div>
+        <div className='questions--answers-container'>{answers}</div>
       </div>
     );
   });
@@ -74,14 +73,18 @@ export default function Questions(props) {
 
   const result = (
     <div className={props.darkMode ? 'result dark--mode' : 'result'}>
-      You scored {correctAnswerCount}/5 correct answers
+      You scored {correctAnswerCount}/{props.config.number} correct answers
     </div>
   );
 
   return (
-    <div className="questions--body">
+    <div className='questions--body'>
+      <button id='return--button'>
+      <FiChevronLeft className={props.darkMode ? 'icon dark--mode' : 'icon'}
+      onClick={props.returnToStart}/>
+      </button>
       {questionComponent}
-      <div className="result--container">
+      <div className='result--container'>
         {props.quizFinished && result}
         <button
           className={props.darkMode ? 'button dark--mode' : 'button'}
