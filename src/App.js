@@ -5,7 +5,9 @@ import Questions from './components/questions';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 
 export default function App() {
-  // state declarations
+
+  /* State Declarations */
+
   const [dark, setDark] = React.useState(false);
   const [config, setConfig] = React.useState({
     number: 5,
@@ -24,6 +26,47 @@ export default function App() {
     question5: ''
   });
   const [quizFinished, setQuizFinished] = React.useState(false);
+  const [firstLoaded, setFirstLoaded] = React.useState(false);
+
+  /* Global Variables */
+
+  let loadedClass = firstLoaded ? 'transition' : '';
+  const loadingScreen = <div className='loading'>Loading...</div>;
+
+  /* Effects */
+
+  // fetches questions when config state is changed
+  React.useEffect(() => {
+    let url = config.difficulty === 'any' ? 
+    `https://opentdb.com/api.php?amount=${config.number}&type=multiple&encode=base64` : 
+    `https://opentdb.com/api.php?amount=${config.number}&difficulty=${config.difficulty}&type=multiple&encode=base64`
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setTriviaData(data.results);
+        setAnswers(
+          data.results.map((item) => {
+            return shuffle([item.correct_answer, ...item.incorrect_answers]);
+          })
+        )
+        setLoading(false)
+      });
+  }, [config]);
+
+  // loads component in dark mode if the last set theme was that
+  React.useEffect(() => {
+    const prefersDark = localStorage.getItem('darkMode');
+    if (prefersDark === 'enabled') {
+      setDark(true);
+    }
+  }, []);
+
+  // applies transitions after start component is loaded to prevent light mode styling flashing before dark mode styling
+  React.useEffect(() => {
+    document.getElementById('main').addEventListener('mouseover', () => {setFirstLoaded(true)}, {once: true});
+  }, []);
+
+  /* Main Functions */
 
   // shuffles items in an array
   function shuffle(array) {
@@ -47,7 +90,13 @@ export default function App() {
 
   // toggles dark mode
   function toggleDarkMode() {
-    setDark((prev) => !prev);
+    if (dark) {
+      setDark(false);
+      localStorage.setItem('darkMode', 'disabled');
+    } else {
+      setDark(true);
+      localStorage.setItem('darkMode', 'enabled');
+    }
   }
 
   // returns to start page
@@ -67,38 +116,11 @@ export default function App() {
     setStarted(true);
     setQuizFinished(false);
   }
-
-  // fetches questions when config state is changed
-  React.useEffect(() => {
-    let url = config.difficulty === 'any' ? 
-    `https://opentdb.com/api.php?amount=${config.number}&type=multiple&encode=base64` : 
-    `https://opentdb.com/api.php?amount=${config.number}&difficulty=${config.difficulty}&type=multiple&encode=base64`
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setTriviaData(data.results);
-        setAnswers(
-          data.results.map((item) => {
-            return shuffle([item.correct_answer, ...item.incorrect_answers]);
-          })
-        )
-        setLoading(false)
-      });
-  }, [config]);
-
-  // maps through fetched data and fills question and answers in object
-  let questionsData = triviaData.map((item, index) => {
-    return {
-      question: atob(item.question),
-      correctAnswer: atob(item.correct_answer),
-      allAnswers: answers[index],
-    };
-  });
-
+  
   // sets answer as the picked answer in a question when clicked if quiz is not finished
   function handleClick(event) {
     const { name, id } = event.target;
-
+    
     if (!quizFinished) {
       setUserAnswers((prev) => {
         return {
@@ -110,20 +132,30 @@ export default function App() {
     return;
   }
 
-  const loadingScreen = <div className={dark ? 'loading dark--mode' : 'loading'}>Loading...</div>
-
+  // maps through fetched data and fills question and answers in object
+  let questionsData = triviaData.map((item, index) => {
+    return {
+      question: atob(item.question),
+      correctAnswer: atob(item.correct_answer),
+      allAnswers: answers[index],
+    };
+  });
+  
   return (
-    <main className={dark ? 'dark--mode' : null}>
-      <button id='dark--mode--button' onClick={toggleDarkMode}>
+    <main 
+    id='main'
+    className={dark ? 'dark--mode ' + loadedClass : loadedClass}
+    >
+      <button id='dark--mode--button' className='secondary--button' onClick={toggleDarkMode}>
         {dark ? (
-          <MdLightMode className={dark ? 'icon dark--mode' : 'icon'} />
+          <MdLightMode className='icon' />
         ) : (
-          <MdDarkMode className={dark ? 'icon dark--mode' : 'icon'} />
+          <MdDarkMode className='icon' />
         )}
       </button>
       {!started ?
         <Start
-          darkMode={dark}
+          firstLoaded={firstLoaded}
           config={config}
           setConfig={setConfig}
           startQuiz={toggleQuiz}
@@ -132,7 +164,6 @@ export default function App() {
         loadingScreen
         : 
         <Questions
-          darkMode={dark}
           returnToStart={returnToStart}
           config={config}
           data={questionsData}

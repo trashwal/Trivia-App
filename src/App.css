@@ -1,41 +1,57 @@
-/* Global variables */
-:root {
-    /* Background variables */
-    --background-color: #d7edf3;
-    --background-color-dark: #1e2650;
+/* Global Variables */
+main {
+    /* Background Variables */
+    --background-color: #d2f2f9;
 
-    /* Main button variables */
-    --button-background-color:  #4D5B9E;
-    --button-background-color-dark: #c0beb3;
-    --button-color: #F5F7FB;
-    --button-color-dark: #0a1f49;
-    --button-hover: #283368;
-    --button-hover-dark: #ffffff;
+    /* Button Variables */
+    --button-background-color:  #2f419d;
+    --button-color: hsl(220, 43%, 97%);
+    --button-hover: hsl(230, 60%, 25%);
+    --button-font-weight: 400;
 
-    /* Secondary button variables */
-    --sec--button--hover: rgba(169, 163, 163, 0.242);
+    /* Secondary Button Variables */
+    --icon-color: #2c3674;
+    --sec-button-hover: hsla(0, 3%, 65%, 0.243);
 
-    /* Start variables */
-    --start-title: #1e2650;
-    --start-title-dark: #dedfe5;
-    --start-description: #2c3674;
-    --start-description-dark: #c3caf1;
+    /* Start Variables */
+    --start-title: hsl(230, 45%, 22%);
+    --start-description: hsl(232, 45%, 31%);
 
-    /* Question variables */
-    --question-background-color: ;
-    --question-background-color-dark: ;
-    --question-color: #121a44;
-    --question-color-dark: #e9e7da;
+    /* Question Variables */
+    --question-color: hsl(230, 58%, 17%);
 
-    /* Answer variables */
-    --answer-color: #ffffff;
-    --answer-color-dark: #0b102dcf;
-    --answer-pick: #bac2ebd5;
-    --answer-pick-dark: #25379f;
-    --answer-correct: #52e448;
-    --answer-correct-dark: rgb(12, 143, 12);
-    --answer-wrong: #fe3535;
-    --answer-wrong-dark: rgb(209, 19, 19);
+    /* Answer Variables */
+    --answer-background-color: hsl(0, 0%, 100%);
+    --answer-pick: hsl(230, 90%, 83%);
+    --answer-correct: hsl(116, 74%, 62%);
+    --answer-wrong: hsl(0, 99%, 62%);
+}
+
+main.dark--mode {
+    /* Dark Background Variables */
+    --background-color: hsl(240, 54%, 16%);
+
+    /* Dark Button Variables */
+    --button-background-color:  hsl(240, 30%, 80%);
+    --button-color: hsl(220, 76%, 16%);
+    --button-hover: hsl(240, 30%, 93%);
+    --button-font-weight: 700;
+
+    /* Dark Secondary Button Variables */
+    --icon-color: #d4cfaf;
+
+    /* Dark Start Variables */
+    --start-title: hsl(231, 12%, 78%);
+    --start-description: hsl(231, 62%, 85%);
+
+    /* Dark Question Variables */
+    --question-color: hsl(236, 54%, 92%);
+
+    /* Dark Answer Variables */
+    --answer-background-color: hsl(215, 70%, 35%);
+    --answer-pick: hsla(230, 51%, 35%, 0.749);
+    --answer-correct: hsl(120, 85%, 30%);
+    --answer-wrong: hsl(0, 83%, 45%);
 }
 
 /* General */
@@ -46,113 +62,82 @@
 main {
     background-color: var(--background-color);
     position: relative;
-    transition: all 0.3s;
-}
-
-main.dark--mode {
-    background-color: var(--background-color-dark);
 }
 
 input {
     display: none;
 }
 
-/* Dark mode button */
-#dark--mode--button {
+.transition {
+    transition: 0.3s;
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'karla';
+    font-size: 1.2rem;
+    background-color: var(--background-color);
+    color: var(--start-title);
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Secondary Button Section */
+
+.secondary--button {
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
     top: 25px;
-    right: 35px;
-    height: 50px;
-    width: 50px;
-    padding: 0;
     background: none;
+    width: 50px;
+    height: 50px;
+    padding: 0;
     border: none;
-    border-radius: 100%;
-    transition: all 0.3s;
+    border-radius: 50%;
+    transition: 0.3s;
 }
 
-#dark--mode--button:hover,
-#dark--mode--button:focus {
+.secondary--button:hover,
+.secondary--button:focus {
+    background-color: var(--sec-button-hover);
     cursor: pointer;
-    background-color: var(--sec--button--hover);
 }
 
 .icon {
     font-size: 1.8rem;
-    color: #2c3674;
+    color: var(--icon-color);
 }
 
-.icon.dark--mode {
-    color: #d4cfaf;
+#dark--mode--button {
+    right: 35px;
 }
 
-/* Return button */
 #return--button {
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 25px;
     left: 35px;
-    height: 50px;
-    width: 50px;
-    padding: 0;
-    background: none;
-    border: none;
-    border-radius: 100%;
-    transition: all 0.3s;
-}
-
-#return--button:hover {
-    cursor: pointer;
-    background-color: var(--sec--button--hover);
 }
 
 #return--button .icon{
     margin-right: 3px;
 }
 
-/* Loading screen */
-.loading {
-    background-color: var(--background-color);
-    color: var(--start-title);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    font-family: 'karla';
-    font-size: 1.2rem;
-    width: 100%;
-    text-align: center;
-}
-
-.loading.dark--mode{
-    background-color: var(--background-color-dark);
-    color: var(--start-title-dark);
-}
-
-/* Button section */
+/* Main Button Section */
 .button {
     font-family: 'Inter';
     font-size: 0.75rem;
+    font-weight: var(--button-font-weight);
     line-height: 0.890625rem;
-    width: 7.5rem;
-    color: var(--button-color);
     background-color: var(--button-background-color);
+    color: var(--button-color);
+    width: 7.5rem;
     padding: 0.75rem;
     border: 0;
     border-radius: 0.5625rem;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, font-weight 0.3s;
-}
-
-.button.dark--mode {
-    background-color: var(--button-background-color-dark);
-    color: var(--button-color-dark);
-    font-weight: 700;
 }
 
 .button:hover,
@@ -160,17 +145,12 @@ input {
     background-color: var(--button-hover);
 }
 
-.button.dark--mode:hover,
-.button.dark--mode:focus {
-    background-color: var(--button-hover-dark);
-}
-
 .button:active {
     background-color: var(--button-hover);
     transform: scale(0.97) translateY(2px);
 }
 
-/* Start section */
+/* Start Section */
 .start--body {
     min-height: 100vh;
     box-sizing: border-box;
@@ -188,11 +168,6 @@ input {
     line-height: 1.73475rem;
     text-align: center;
     color: var(--start-title);
-    transition: color 0.3s;
-}
-
-.start--title.dark--mode {
-    color: var(--start-title-dark);
 }
 
 .start--description {
@@ -203,11 +178,6 @@ input {
     text-align: center;
     color: var(--start-description);
     margin: 8px 0 24px 0;
-    transition: color 0.3s;
-}
-
-.start--description.dark--mode {
-    color: var(--start-description-dark);
 }
 
 #start--configuration {
@@ -224,7 +194,7 @@ input {
     align-items: center;
 }
 
-label {
+.config--label {
     display: block;
     font-family: 'Inter';
     font-weight: 600;
@@ -232,14 +202,9 @@ label {
     line-height: 0.9rem;
     color: var(--start-description);
     margin-bottom: 6px;
-    transition: color 0.3s;
 }
 
-label.dark--mode {
-    color: var(--start-description-dark);
-}
-
-select {
+.config--select {
     padding: 2px;
     font-size: 0.675rem;
     border-radius: 3px;
@@ -247,27 +212,15 @@ select {
     border: 0.09375rem solid;
     background-color: var(--button-background-color);
     color: var(--button-color);
-    transition: background-color 0.3s, color 0.3s;
 }
 
-select:hover,
-select:focus {
+.config--select:hover,
+.config--select:focus {
     cursor: pointer;
     background-color: var(--button-hover);
 }
 
-select.dark--mode {
-    background-color: var(--button-background-color-dark);
-    color: var(--button-color-dark);
-}
-
-select.dark--mode:hover,
-select.dark--mode:focus {
-    cursor: pointer;
-    background-color: var(--button-hover-dark);
-}
-
-/* Questions section */
+/* Questions Section */
 .questions--body {
     min-height: 100vh;
     box-sizing: border-box;
@@ -294,11 +247,7 @@ select.dark--mode:focus {
     width: 40%;
 }
 
-.questions--question.dark--mode {
-    color: var(--question-color-dark);
-}
-
-/* Answers section */
+/* Answers Section */
 .questions--answers-container {
     display: flex;
     justify-content: center;
@@ -312,19 +261,14 @@ select.dark--mode:focus {
     font-weight: 700;
     font-size: 0.675rem;
     line-height: 0.5625rem;
-    background-color: var(--answer-color);
+    background-color: var(--answer-background-color);
     margin: 0.375rem;
     padding: 0.75rem;
     border: 0.09375rem solid;
     border-radius: 0.75rem;
     cursor: pointer;
     color: var(--question-color);
-    transition: all 0.3s;
-}
-
-.questions--answer.dark--mode {
-    background-color: var(--answer-color-dark);
-    color: var(--question-color-dark);
+    transition: 0.3s;
 }
 
 .questions--answer:hover {
@@ -332,19 +276,9 @@ select.dark--mode:focus {
     border: 0.09375rem solid var(--answer-pick);
 }
 
-.questions--answer.dark--mode:hover {
-    background-color: var(--answer-pick-dark);
-    border: 0.09375rem solid var(--answer-pick-dark);
-}
-
 .picked {
     background-color: var(--answer-pick);
     border: 0.09375rem solid var(--answer-pick);
-}
-
-.dark--mode.picked {
-    background-color: var(--answer-pick-dark);
-    border: 0.09375rem solid var(--answer-pick-dark);
 }
 
 .correct {
@@ -352,22 +286,12 @@ select.dark--mode:focus {
     border: 0.09375rem solid var(--answer-correct);
 }
 
-.dark--mode.correct {
-    background-color: var(--answer-correct-dark);
-    border: 0.09375rem solid var(--answer-correct-dark);
-}
-
 .wrong {
     background-color: var(--answer-wrong);
     border: 0.09375rem solid var(--answer-wrong);
 }
 
-.dark--mode.wrong {
-    background-color: var(--answer-wrong-dark);
-    border: 0.09375rem solid var(--answer-wrong-dark);
-}
-
-/* Result section */
+/* Result Section */
 .result--container {
     display: flex;
     justify-content: center;
@@ -381,9 +305,5 @@ select.dark--mode:focus {
     font-weight: 900;
     font-size: 0.675rem;
     margin-right: 1rem;
-    transition: color 0.3s;
-}
-
-.result.dark--mode {
-    color: var(--start-title-dark);
+    transition: 0.3s;
 }

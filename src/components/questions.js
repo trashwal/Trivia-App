@@ -12,13 +12,10 @@ export default function Questions(props) {
 
   // creating question components
   const questionComponent = props.data.map((item, index) => {
-    let classes = props.darkMode
-      ? 'questions--question dark--mode'
-      : 'questions--question';
 
     // creating question element
     const question = (
-      <h2 className={classes}>
+      <h2 className='questions--question'>
         {index + 1}. {item.question}
       </h2>
     );
@@ -27,9 +24,7 @@ export default function Questions(props) {
     const answers = item.allAnswers.map((answerEncrypted) => {
       const answer = atob(answerEncrypted);
       const name = `question${index + 1}`;
-      let classes = props.darkMode
-        ? 'questions--answer dark--mode'
-        : 'questions--answer';
+      let classes = 'questions--answer'
       if (props.quizFinished) {
         if (answer === item.correctAnswer) {
           classes += ' correct';
@@ -72,22 +67,22 @@ export default function Questions(props) {
   });
 
   const result = (
-    <div className={props.darkMode ? 'result dark--mode' : 'result'}>
+    <div className='result'>
       You scored {correctAnswerCount}/{props.config.number} correct answers
     </div>
   );
 
   return (
     <div className='questions--body'>
-      <button id='return--button'>
-      <FiChevronLeft className={props.darkMode ? 'icon dark--mode' : 'icon'}
+      <button id='return--button' className='secondary--button'>
+      <FiChevronLeft className='icon'
       onClick={props.returnToStart}/>
       </button>
       {questionComponent}
       <div className='result--container'>
         {props.quizFinished && result}
         <button
-          className={props.darkMode ? 'button dark--mode' : 'button'}
+          className='button transition'
           onClick={props.quizFinished ? props.restartQuiz : checkAnswers}
         >
           {props.quizFinished ? 'Play Again' : 'Check Answers'}
