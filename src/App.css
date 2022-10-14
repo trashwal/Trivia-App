@@ -1,16 +1,16 @@
 /* Global Variables */
 main {
     /* Background Variables */
-    --background-color: #d2f2f9;
+    --background-color: hsl(191, 76%, 90%);
 
     /* Button Variables */
-    --button-background-color:  #2f419d;
+    --button-background-color:  hsl(230, 54%, 40%);
     --button-color: hsl(220, 43%, 97%);
     --button-hover: hsl(230, 60%, 25%);
     --button-font-weight: 400;
 
     /* Secondary Button Variables */
-    --icon-color: #2c3674;
+    --icon-color: hsl(232, 45%, 31%);
     --sec-button-hover: hsla(0, 3%, 65%, 0.243);
 
     /* Start Variables */
@@ -22,14 +22,14 @@ main {
 
     /* Answer Variables */
     --answer-background-color: hsl(0, 0%, 100%);
-    --answer-pick: hsl(230, 90%, 83%);
+    --answer-pick: hsla(230, 89%, 85%, 0.85);
     --answer-correct: hsl(116, 74%, 62%);
     --answer-wrong: hsl(0, 99%, 62%);
 }
 
 main.dark--mode {
     /* Dark Background Variables */
-    --background-color: hsl(240, 54%, 16%);
+    --background-color: hsl(221, 70%, 16%);
 
     /* Dark Button Variables */
     --button-background-color:  hsl(240, 30%, 80%);
@@ -38,18 +38,18 @@ main.dark--mode {
     --button-font-weight: 700;
 
     /* Dark Secondary Button Variables */
-    --icon-color: #d4cfaf;
+    --icon-color: #e0e1f6;
 
     /* Dark Start Variables */
     --start-title: hsl(231, 12%, 78%);
     --start-description: hsl(231, 62%, 85%);
 
     /* Dark Question Variables */
-    --question-color: hsl(236, 54%, 92%);
+    --question-color: hsl(237, 55%, 92%);
 
     /* Dark Answer Variables */
     --answer-background-color: hsl(215, 70%, 35%);
-    --answer-pick: hsla(230, 51%, 35%, 0.749);
+    --answer-pick: hsla(230, 51%, 35%, 0.652);
     --answer-correct: hsl(120, 85%, 30%);
     --answer-wrong: hsl(0, 83%, 45%);
 }
@@ -86,7 +86,6 @@ input {
 }
 
 /* Secondary Button Section */
-
 .secondary--button {
     position: fixed;
     display: flex;
@@ -271,7 +270,7 @@ input {
     transition: 0.3s;
 }
 
-.questions--answer:hover {
+.questions--answer:hover:not(.correct, .wrong) {
     background-color: var(--answer-pick);
     border: 0.09375rem solid var(--answer-pick);
 }
