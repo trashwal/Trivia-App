@@ -1,62 +1,69 @@
 /* Global Variables */
 main {
     /* Background Variables */
-    --background-color: hsl(191, 76%, 90%);
+    --background-color: hsl(191 76% 90%);
 
     /* Button Variables */
-    --button-background-color:  hsl(230, 54%, 40%);
-    --button-color: hsl(220, 43%, 97%);
-    --button-hover: hsl(230, 60%, 25%);
+    --button-background-color:  hsl(230 54% 40%);
+    --button-color: hsl(220 43% 97%);
+    --button-hover: hsl(230 60% 25%);
     --button-font-weight: 400;
 
     /* Secondary Button Variables */
-    --icon-color: hsl(232, 45%, 31%);
-    --sec-button-hover: hsla(0, 3%, 65%, 0.243);
+    --icon-color: hsl(232 45% 31%);
+    --sec-button-hover: hsl(0 3% 65% / 0.243);
 
     /* Start Variables */
-    --start-title: hsl(230, 45%, 22%);
-    --start-description: hsl(232, 45%, 31%);
+    --start-title: hsl(230 45% 22%);
+    --start-description: hsl(232 45% 31%);
 
     /* Question Variables */
-    --question-color: hsl(230, 58%, 17%);
+    --question-color: hsl(230 58% 17%);
 
     /* Answer Variables */
-    --answer-background-color: hsl(0, 0%, 100%);
-    --answer-pick: hsla(230, 89%, 85%, 0.85);
-    --answer-correct: hsl(116, 74%, 62%);
-    --answer-wrong: hsl(0, 99%, 62%);
+    --answer-background-color: hsl(0 0% 100%);
+    --answer-pick: hsl(230 89% 85% / 0.85);
+    --answer-correct: hsl(116 74% 62%);
+    --answer-wrong: hsl(0 99% 62%);
+
+    --transition: none;
 }
 
 main.dark--mode {
     /* Dark Background Variables */
-    --background-color: hsl(221, 70%, 16%);
+    --background-color: hsl(221 70% 16%);
 
     /* Dark Button Variables */
-    --button-background-color:  hsl(240, 30%, 80%);
-    --button-color: hsl(220, 76%, 16%);
-    --button-hover: hsl(240, 30%, 93%);
+    --button-background-color:  hsl(240 30% 80%);
+    --button-color: hsl(220 76% 16%);
+    --button-hover: hsl(240 30% 93%);
     --button-font-weight: 700;
 
     /* Dark Secondary Button Variables */
     --icon-color: #e0e1f6;
 
     /* Dark Start Variables */
-    --start-title: hsl(231, 12%, 78%);
-    --start-description: hsl(231, 62%, 85%);
+    --start-title: hsl(231 12% 78%);
+    --start-description: hsl(231 62% 85%);
 
     /* Dark Question Variables */
-    --question-color: hsl(237, 55%, 92%);
+    --question-color: hsl(237 55% 92%);
 
     /* Dark Answer Variables */
-    --answer-background-color: hsl(215, 70%, 35%);
-    --answer-pick: hsla(230, 51%, 35%, 0.652);
-    --answer-correct: hsl(120, 85%, 30%);
-    --answer-wrong: hsl(0, 83%, 45%);
+    --answer-background-color: hsl(215 70% 35%);
+    --answer-pick: hsl(230 51% 35% / 0.652);
+    --answer-correct: hsl(120 85% 30%);
+    --answer-wrong: hsl(0 83% 45%);
+}
+
+main.loaded {
+    --transition: .3s
 }
 
 /* General */
 * {
     margin: 0;
+    transition: var(--transition);
 }
 
 main {
@@ -66,10 +73,6 @@ main {
 
 input {
     display: none;
-}
-
-.transition {
-    transition: 0.3s;
 }
 
 .loading {
@@ -98,7 +101,6 @@ input {
     padding: 0;
     border: none;
     border-radius: 50%;
-    transition: 0.3s;
 }
 
 .secondary--button:hover,
@@ -267,7 +269,6 @@ input {
     border-radius: 0.75rem;
     cursor: pointer;
     color: var(--question-color);
-    transition: 0.3s;
 }
 
 .questions--answer:hover:not(.correct, .wrong) {
@@ -304,5 +305,4 @@ input {
     font-weight: 900;
     font-size: 0.675rem;
     margin-right: 1rem;
-    transition: 0.3s;
 }

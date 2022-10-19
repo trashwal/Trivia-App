@@ -30,7 +30,6 @@ export default function App() {
 
   /* Global Variables */
 
-  let loadedClass = firstLoaded ? 'transition' : '';
   const loadingScreen = <div className='loading'>Loading...</div>;
 
   /* Effects */
@@ -63,7 +62,9 @@ export default function App() {
 
   // applies transitions after start component is loaded to prevent light mode styling flashing before dark mode styling
   React.useEffect(() => {
-    document.getElementById('main').addEventListener('mouseover', () => {setFirstLoaded(true)}, {once: true});
+    setTimeout(() => {
+      setFirstLoaded(true);
+    }, 100);
   }, []);
 
   /* Main Functions */
@@ -143,8 +144,7 @@ export default function App() {
   
   return (
     <main 
-    id='main'
-    className={dark ? 'dark--mode ' + loadedClass : loadedClass}
+    className={`main ${dark ? 'dark--mode' : ''} ${firstLoaded ? 'loaded' : ''}`}
     >
       <button id='dark--mode--button' className='secondary--button' onClick={toggleDarkMode}>
         {dark ? (
@@ -155,7 +155,6 @@ export default function App() {
       </button>
       {!started ?
         <Start
-          firstLoaded={firstLoaded}
           config={config}
           setConfig={setConfig}
           startQuiz={toggleQuiz}

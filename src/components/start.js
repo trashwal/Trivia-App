@@ -1,20 +1,18 @@
 import React from 'react';
 
 export default function Start(props) {
-
-  let loadedClass = props.firstLoaded ? 'transition' : '';
   
   return (
     <div className='start--body'>
-      <h1 className={`start--title ${loadedClass}`}>
+      <h1 className='start--title'>
         Trivia Quiz
       </h1>
-      <h4 className={`start--description ${loadedClass}`}>
+      <h4 className='start--description'>
         Press the button to generate trivia questions
       </h4>
       <div id='start--configuration'>
         <div id='config--number'>
-          <label htmlFor='number' className={`config--label ${loadedClass}`}>
+          <label htmlFor='number' className='config--label'>
             Number of questions:{' '}
           </label>
           <select
@@ -26,7 +24,7 @@ export default function Start(props) {
             }}
             defaultValue={props.config.number}
             id='number'
-            className={`config--select ${loadedClass}`}
+            className='config--select'
           >
             <option value='5'>5</option>
             <option value='6'>6</option>
@@ -37,7 +35,7 @@ export default function Start(props) {
           </select>
         </div>
         <div id='config--difficulty'>
-          <label htmlFor='difficulty' className={`config--label ${loadedClass}`}>
+          <label htmlFor='difficulty' className='config--label'>
             Difficulty of questions:{' '}
           </label>
           <select
@@ -46,7 +44,7 @@ export default function Start(props) {
             }}
             defaultValue={props.config.difficulty}
             id='difficulty'
-            className={`config--select ${loadedClass}`}
+            className='config--select'
           >
             <option value='any'>Any</option>
             <option value='easy'>Easy</option>
@@ -56,7 +54,7 @@ export default function Start(props) {
         </div>
       </div>
       <button
-        className={`button ${loadedClass}`}
+        className='button'
         onClick={props.startQuiz}
       >
         Start quiz
