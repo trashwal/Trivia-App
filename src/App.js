@@ -5,7 +5,6 @@ import Questions from './components/questions';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 
 export default function App() {
-
   /* State Declarations */
 
   const [dark, setDark] = React.useState(false);
@@ -23,22 +22,23 @@ export default function App() {
     question2: '',
     question3: '',
     question4: '',
-    question5: ''
+    question5: '',
   });
   const [quizFinished, setQuizFinished] = React.useState(false);
   const [firstLoaded, setFirstLoaded] = React.useState(false);
 
   /* Global Variables */
 
-  const loadingScreen = <div className='loading'>Loading...</div>;
+  const loadingScreen = <div className="loading">Loading...</div>;
 
   /* Effects */
 
   // fetches questions when config state is changed
   React.useEffect(() => {
-    let url = config.difficulty === 'any' ? 
-    `https://opentdb.com/api.php?amount=${config.number}&type=multiple&encode=base64` : 
-    `https://opentdb.com/api.php?amount=${config.number}&difficulty=${config.difficulty}&type=multiple&encode=base64`
+    let url =
+      config.difficulty === 'any'
+        ? `https://opentdb.com/api.php?amount=${config.number}&type=multiple&encode=base64`
+        : `https://opentdb.com/api.php?amount=${config.number}&category=9&difficulty=${config.difficulty}&type=multiple&encode=base64`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -47,8 +47,8 @@ export default function App() {
           data.results.map((item) => {
             return shuffle([item.correct_answer, ...item.incorrect_answers]);
           })
-        )
-        setLoading(false)
+        );
+        setLoading(false);
       });
   }, [config]);
 
@@ -85,8 +85,8 @@ export default function App() {
       question2: '',
       question3: '',
       question4: '',
-      question5: ''
-    })
+      question5: '',
+    });
   }
 
   // toggles dark mode
@@ -102,8 +102,8 @@ export default function App() {
 
   // returns to start page
   function returnToStart() {
-    setStarted(false)
-    setQuizFinished(false)
+    setStarted(false);
+    setQuizFinished(false);
   }
 
   // starts or restarts quiz
@@ -111,25 +111,25 @@ export default function App() {
     setLoading(true);
     setConfig({
       ...config,
-      flip: !config.flip
+      flip: !config.flip,
     });
     resetAnswers();
     setStarted(true);
     setQuizFinished(false);
   }
-  
+
   // sets answer as the picked answer in a question when clicked if quiz is not finished
   function handleClick(event) {
     const { name, id } = event.target;
-    
+
     if (!quizFinished) {
       setUserAnswers((prev) => {
         return {
           ...prev,
-          [name]: id
-        }
-      })
-    } 
+          [name]: id,
+        };
+      });
+    }
     return;
   }
 
@@ -141,27 +141,29 @@ export default function App() {
       allAnswers: answers[index],
     };
   });
-  
+
   return (
-    <main 
-    className={`main ${dark ? 'dark--mode' : ''} ${firstLoaded ? 'loaded' : ''}`}
+    <main
+      className={`main ${dark ? 'dark--mode' : ''} ${
+        firstLoaded ? 'loaded' : ''
+      }`}
     >
-      <button id='dark--mode--button' className='secondary--button' onClick={toggleDarkMode}>
+      <button
+        id="dark--mode--button"
+        className="secondary--button"
+        onClick={toggleDarkMode}
+      >
         {dark ? (
-          <MdLightMode className='icon' />
+          <MdLightMode className="icon" />
         ) : (
-          <MdDarkMode className='icon' />
+          <MdDarkMode className="icon" />
         )}
       </button>
-      {!started ?
-        <Start
-          config={config}
-          setConfig={setConfig}
-          startQuiz={toggleQuiz}
-        />
-        : loading ?
+      {!started ? (
+        <Start config={config} setConfig={setConfig} startQuiz={toggleQuiz} />
+      ) : loading ? (
         loadingScreen
-        : 
+      ) : (
         <Questions
           returnToStart={returnToStart}
           config={config}
@@ -172,7 +174,7 @@ export default function App() {
           setQuizFinished={setQuizFinished}
           restartQuiz={toggleQuiz}
         />
-      }
+      )}
     </main>
   );
 }

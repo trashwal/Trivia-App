@@ -1,6 +1,6 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
-import { FiChevronLeft } from 'react-icons/fi'
+import { FiChevronLeft } from 'react-icons/fi';
 
 export default function Questions(props) {
   // checks correct answers if all questions are answered
@@ -12,10 +12,9 @@ export default function Questions(props) {
 
   // creating question components
   const questionComponent = props.data.map((item, index) => {
-
     // creating question element
     const question = (
-      <h2 className='questions--question'>
+      <h2 className="questions--question">
         {index + 1}. {item.question}
       </h2>
     );
@@ -24,7 +23,7 @@ export default function Questions(props) {
     const answers = item.allAnswers.map((answerEncrypted) => {
       const answer = atob(answerEncrypted);
       const name = `question${index + 1}`;
-      let classes = 'questions--answer'
+      let classes = 'questions--answer';
       if (props.quizFinished) {
         if (answer === item.correctAnswer) {
           classes += ' correct';
@@ -39,7 +38,7 @@ export default function Questions(props) {
         <label key={nanoid()} className={classes} htmlFor={answer}>
           {answer}
           <input
-            type='radio'
+            type="radio"
             id={answer}
             name={name}
             onClick={props.handleClick}
@@ -49,9 +48,9 @@ export default function Questions(props) {
     });
 
     return (
-      <div key={nanoid()} className='questions--question-component'>
+      <div key={nanoid()} className="questions--question-component">
         {question}
-        <div className='questions--answers-container'>{answers}</div>
+        <div className="questions--answers-container">{answers}</div>
       </div>
     );
   });
@@ -67,22 +66,21 @@ export default function Questions(props) {
   });
 
   const result = (
-    <div className='result'>
+    <div className="result">
       You scored {correctAnswerCount}/{props.config.number} correct answers
     </div>
   );
 
   return (
-    <div className='questions--body'>
-      <button id='return--button' className='secondary--button'>
-      <FiChevronLeft className='icon'
-      onClick={props.returnToStart}/>
+    <div className="questions--body">
+      <button id="return--button" className="secondary--button">
+        <FiChevronLeft className="icon" onClick={props.returnToStart} />
       </button>
       {questionComponent}
-      <div className='result--container'>
+      <div className="result--container">
         {props.quizFinished && result}
         <button
-          className='button transition'
+          className="button transition"
           onClick={props.quizFinished ? props.restartQuiz : checkAnswers}
         >
           {props.quizFinished ? 'Play Again' : 'Check Answers'}
