@@ -38,7 +38,7 @@ export default function App() {
     let url =
       config.difficulty === 'any'
         ? `https://opentdb.com/api.php?amount=${config.number}&type=multiple&encode=base64`
-        : `https://opentdb.com/api.php?amount=${config.number}&category=9&difficulty=${config.difficulty}&type=multiple&encode=base64`;
+        : `https://opentdb.com/api.php?amount=${config.number}&difficulty=${config.difficulty}&type=multiple&encode=base64`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -126,7 +126,7 @@ export default function App() {
       setUserAnswers((prev) => {
         return {
           ...prev,
-          [name]: id,
+          [name]: id.slice(id.indexOf('-') + 1),
         };
       });
     }

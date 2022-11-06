@@ -23,7 +23,9 @@ export default function Questions(props) {
     const answers = item.allAnswers.map((answerEncrypted) => {
       const answer = atob(answerEncrypted);
       const name = `question${index + 1}`;
+      const id = `Q${index + 1}-${answer}`;
       let classes = 'questions--answer';
+
       if (props.quizFinished) {
         if (answer === item.correctAnswer) {
           classes += ' correct';
@@ -35,14 +37,9 @@ export default function Questions(props) {
       }
 
       return (
-        <label key={nanoid()} className={classes} htmlFor={answer}>
+        <label key={nanoid()} className={classes} htmlFor={id}>
           {answer}
-          <input
-            type="radio"
-            id={answer}
-            name={name}
-            onClick={props.handleClick}
-          />
+          <input type="radio" id={id} name={name} onClick={props.handleClick} />
         </label>
       );
     });
