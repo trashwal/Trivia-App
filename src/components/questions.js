@@ -1,6 +1,5 @@
-import React from 'react';
+import { decode } from 'html-entities';
 import { nanoid } from 'nanoid';
-import { FiChevronLeft } from 'react-icons/fi';
 
 export default function Questions(props) {
   // checks correct answers if all questions are answered
@@ -11,23 +10,23 @@ export default function Questions(props) {
   }
 
   // creating question components
-  const questionComponent = props.data.map((item, index) => {
+  const questionComponent = props.triviaData.map((item, index) => {
     // creating question element
     const question = (
       <h2 className="questions--question">
-        {index + 1}. {item.question}
+        {index + 1}. {decode(item.question)}
       </h2>
     );
 
     // creating answer elements
-    const answers = item.allAnswers.map((answerEncrypted) => {
-      const answer = atob(answerEncrypted);
+    const answers = item.allAnswers.map((codedAnswer) => {
+      const answer = decode(codedAnswer);
       const name = `question${index + 1}`;
       const id = `Q${index + 1}-${answer}`;
       let classes = 'questions--answer';
 
       if (props.quizFinished) {
-        if (answer === item.correctAnswer) {
+        if (answer === decode(item.correctAnswer)) {
           classes += ' correct';
         } else if (answer === props.userAnswers[name]) {
           classes += ' wrong';
@@ -39,7 +38,7 @@ export default function Questions(props) {
       return (
         <label key={nanoid()} className={classes} htmlFor={id}>
           {answer}
-          <input type="radio" id={id} name={name} onClick={props.handleClick} />
+          <input type="radio" id={id} name={name} onClick={props.pickAnswer} />
         </label>
       );
     });
@@ -52,12 +51,16 @@ export default function Questions(props) {
     );
   });
 
-  const correctAnswers = props.data.map((item) => item.correctAnswer);
+  console.log(props.userAnswers);
+
+  const correctAnswers = props.triviaData.map((item) =>
+    decode(item.correctAnswer)
+  );
 
   let correctAnswerCount = 0;
 
   correctAnswers.map((answer, index) => {
-    return answer === props.userAnswers[`question${index + 1}`]
+    return props.userAnswers[`question${index + 1}`] === answer
       ? correctAnswerCount++
       : null;
   });
@@ -70,9 +73,6 @@ export default function Questions(props) {
 
   return (
     <div className="questions--body">
-      <button id="return--button" className="secondary--button">
-        <FiChevronLeft className="icon" onClick={props.returnToStart} />
-      </button>
       {questionComponent}
       <div className="result--container">
         {props.quizFinished && result}

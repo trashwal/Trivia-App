@@ -1,5 +1,5 @@
 /* Global Variables */
-main {
+.main {
   /* Background Variables */
   --background-color: hsl(191 76% 90%);
 
@@ -9,9 +9,9 @@ main {
   --button-hover: hsl(230 60% 25%);
   --button-font-weight: 400;
 
-  /* Secondary Button Variables */
+  /* Nav Button Variables */
   --icon-color: hsl(232 45% 31%);
-  --sec-button-hover: hsl(0 3% 65% / 0.243);
+  --nav-button-hover: hsl(0 3% 65% / 0.243);
 
   /* Start Variables */
   --start-title: hsl(230 45% 22%);
@@ -26,10 +26,10 @@ main {
   --answer-correct: hsl(116 74% 62%);
   --answer-wrong: hsl(0 99% 62%);
 
-  --transition: none;
+  --transition-time: none;
 }
 
-main.dark--mode {
+.main.dark--mode {
   /* Dark Background Variables */
   --background-color: hsl(221 70% 16%);
 
@@ -39,7 +39,7 @@ main.dark--mode {
   --button-hover: hsl(240 30% 93%);
   --button-font-weight: 700;
 
-  /* Dark Secondary Button Variables */
+  /* Dark top Button Variables */
   --icon-color: #e0e1f6;
 
   /* Dark Start Variables */
@@ -56,19 +56,23 @@ main.dark--mode {
   --answer-wrong: hsl(0 83% 45%);
 }
 
-main.loaded {
-  --transition: 0.3s;
+.main.loaded {
+  --transition-time: 0.3s;
 }
 
 /* General */
-* {
-  margin: 0;
-  transition: var(--transition);
+html,
+body,
+.main,
+.start--body {
+  min-height: 100vh;
 }
 
-main {
+.main {
+  display: flex;
+  flex-direction: column;
   background-color: var(--background-color);
-  position: relative;
+  transition: var(--transition-time);
 }
 
 input {
@@ -86,43 +90,42 @@ input {
   color: var(--start-title);
   width: 100%;
   min-height: 100vh;
+  transition: var(--transition-time);
 }
 
-/* Secondary Button Section */
-.secondary--button {
-  position: fixed;
+/* Nav Section */
+.nav {
+  display: flex;
+  padding: 1rem 1rem 0 1rem;
+}
+
+.nav--button {
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 25px;
+  font-size: 1.8rem;
   background: none;
+  color: var(--icon-color);
   width: 50px;
   height: 50px;
-  padding: 0;
   border: none;
   border-radius: 50%;
+  transition: background-color var(--transition-time);
 }
 
-.secondary--button:hover,
-.secondary--button:focus {
-  background-color: var(--sec-button-hover);
+.nav--button:hover,
+.nav--button:focus {
+  background-color: var(--nav-button-hover);
+  outline: none;
   cursor: pointer;
 }
 
-.icon {
-  font-size: 1.8rem;
-  color: var(--icon-color);
-}
-
 #dark--mode--button {
-  right: 35px;
-}
-
-#return--button {
-  left: 35px;
+  margin-left: auto;
 }
 
 #return--button .icon {
+  font-size: 2rem;
   margin-right: 3px;
 }
 
@@ -131,68 +134,72 @@ input {
   font-family: 'Inter';
   font-size: 0.75rem;
   font-weight: var(--button-font-weight);
-  line-height: 0.890625rem;
   background-color: var(--button-background-color);
   color: var(--button-color);
-  width: 7.5rem;
-  padding: 0.75rem;
+  width: 120px;
+  padding: 12px;
   border: 0;
-  border-radius: 0.5625rem;
+  border-radius: 12px;
   cursor: pointer;
+  transition: var(--transition-time);
 }
 
 .button:hover,
 .button:focus {
   background-color: var(--button-hover);
+  outline: none;
+  scale: 1.05;
 }
 
 .button:active {
   background-color: var(--button-hover);
-  transform: scale(0.97) translateY(2px);
+  scale: 0.97;
 }
 
 /* Start Section */
 .start--body {
-  min-height: 100vh;
-  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 1.5rem;
+  justify-content: center;
+  transform: translateX(-50%);
 }
 
 .start--title {
   font-family: 'Karla';
   font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 1.73475rem;
+  font-size: 1.8rem;
   text-align: center;
   color: var(--start-title);
+  margin: 0;
+  transition: var(--transition-time);
 }
 
 .start--description {
   font-family: 'Inter';
   font-weight: 600;
   font-size: 0.75rem;
-  line-height: 0.9rem;
   text-align: center;
   color: var(--start-description);
   margin: 8px 0 24px 0;
+  transition: var(--transition-time);
 }
 
 #start--configuration {
   display: flex;
-  width: 45%;
-  justify-content: space-evenly;
+  justify-content: center;
   margin-bottom: 20px;
 }
 
 #start--configuration div {
   display: flex;
-  min-width: 150px;
   flex-direction: column;
   align-items: center;
+  min-width: 150px;
+  margin-inline: 1.2rem;
 }
 
 .config--label {
@@ -200,80 +207,88 @@ input {
   font-family: 'Inter';
   font-weight: 600;
   font-size: 0.75rem;
-  line-height: 0.9rem;
   color: var(--start-description);
   margin-bottom: 6px;
+  transition: var(--transition-time);
 }
 
 .config--select {
   padding: 2px;
   font-size: 0.675rem;
-  border-radius: 3px;
-  width: 70px;
-  border: 0.09375rem solid;
   background-color: var(--button-background-color);
   color: var(--button-color);
+  width: 70px;
+  border: 0.09375rem solid;
+  border-radius: 3px;
+  transition: var(--transition-time);
 }
 
 .config--select:hover,
 .config--select:focus {
-  cursor: pointer;
   background-color: var(--button-hover);
+  outline: none;
+  cursor: pointer;
 }
 
 /* Questions Section */
 .questions--body {
-  min-height: 100vh;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  justify-content: space-around;
+  flex: 1 1 auto;
+  gap: 1rem;
+  text-align: center;
+  padding: 0 1rem 1rem 1rem;
 }
 
 .questions--question-component {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.3rem;
   width: 100%;
-  margin: auto;
 }
 
 .questions--question {
   font-family: 'Karla';
   font-weight: 700;
-  font-size: 0.9525rem;
-  line-height: 1.05rem;
+  font-size: 15px;
   color: var(--question-color);
   padding: 0.23475rem;
-  width: 40%;
+  margin: 0;
+  transition: var(--transition-time);
 }
 
 /* Answers Section */
 .questions--answers-container {
   display: flex;
   justify-content: center;
-  width: 70%;
-  margin-block: 8px;
   flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .questions--answer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Inter';
   font-weight: 700;
-  font-size: 0.675rem;
-  line-height: 0.5625rem;
+  font-size: 0.67rem;
+  line-height: 0.55rem;
   background-color: var(--answer-background-color);
-  margin: 0.375rem;
-  padding: 0.75rem;
-  border: 0.09375rem solid;
-  border-radius: 0.75rem;
-  cursor: pointer;
   color: var(--question-color);
+  padding: 13px;
+  border: 0.09375rem solid;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: var(--transition-time);
 }
 
-.questions--answer:hover:not(.correct, .wrong) {
+.questions--answer:hover:not(.correct, .wrong),
+.questions--answer:focus:not(.correct, .wrong) {
   background-color: var(--answer-pick);
   border: 0.09375rem solid var(--answer-pick);
+  outline: none;
 }
 
 .picked {
@@ -305,4 +320,5 @@ input {
   font-weight: 900;
   font-size: 0.675rem;
   margin-right: 1rem;
+  transition: var(--transition-time);
 }
