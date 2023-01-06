@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# **Trivia Quiz App**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React application that fetches and previews questions from the [_Open Trivia Database API_](https://opentdb.com/api_config.php) according to config options selected, the application also highlights right and wrong answers and calculates the score at the end of the quiz.
 
-## Available Scripts
+## **Live Demo**
 
-In the project directory, you can run:
+You can check out the Live version of the App [_here_](https://trivia-app-ash.netlify.app/).
 
-### `npm start`
+## **Installation**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+You can download all dependencies needed for development by running `npm install` in your terminal.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## **Running The Application**
 
-### `npm test`
+To run the app locally, you can start up the server by running `npm run start` in your terminal, then navigate to [_localhost:300_](http://localhost:3000/) using your browser, you can go ahead and choose the config options you'd like for the quiz and hit Start Quiz.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## **Mock-ups**
 
-### `npm run build`
+![](/public/mock-ups/trivia_app_light_mock-up_1.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![](/public/mock-ups/trivia_app_light_mock-up_2.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![](/public/mock-ups/trivia_app_light_mock-up_3.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![](/public/mock-ups/trivia_app_dark_mock-up_1.png)
 
-### `npm run eject`
+![](/public/mock-ups/trivia_app_dark_mock-up_2.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![](/public/mock-ups/trivia_app_dark_mock-up_3.png)
