@@ -2,13 +2,6 @@ import { decode } from 'html-entities';
 import { nanoid } from 'nanoid';
 
 export default function Questions(props) {
-  // checks correct answers if all questions are answered
-  function checkAnswers() {
-    Object.values(props.userAnswers).includes('')
-      ? alert('Answer all the questions before checking')
-      : props.setQuizFinished(true);
-  }
-
   // creating question components
   const questionComponent = props.triviaData.map((item, index) => {
     // creating question element
@@ -51,8 +44,6 @@ export default function Questions(props) {
     );
   });
 
-  console.log(props.userAnswers);
-
   const correctAnswers = props.triviaData.map((item) =>
     decode(item.correctAnswer)
   );
@@ -78,7 +69,7 @@ export default function Questions(props) {
         {props.quizFinished && result}
         <button
           className="button transition"
-          onClick={props.quizFinished ? props.restartQuiz : checkAnswers}
+          onClick={props.quizFinished ? props.restartQuiz : props.checkAnswers}
         >
           {props.quizFinished ? 'Play Again' : 'Check Answers'}
         </button>
