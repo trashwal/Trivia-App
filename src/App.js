@@ -54,6 +54,14 @@ export default function App() {
         firstLoaded ? 'loaded' : ''
       }`}
     >
+      <svg className="blobs blob-1" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 61 -66 C 95 -70 94 -32 84 -17 C 73 -2 57 11 50 27 C 43 44 33.6 57.3 20.4 66.7 C 7.2 76.1 -11.8 80.3 -32 77 C -53 71 -48 47 -48 34 C -49 18 -48 7 -49 -4 C -49 -14 -50 -26 -49 -64 C -14 -71 -7 -68 5 -68 c 22 1 37 2.4 56 2 Z" />
+      </svg>
+      <svg className="blobs blob-2" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M 52 -66 C 65 -56 68 -32 64 -9 C 63 8 63 16 60 63 C 50 70 27 72 10 74 C -1 75 -9 76 -27 77 C -65 81 -81 65 -80 46 C -80 29 -71.7 8.1 -62 -4.7 C -52.3 -17.6 -38.5 -23.5 -27.5 -33.8 C -16.4 -44.2 -8.2 -59 6.6 -66.8 C 21.3 -74.6 42.7 -75.4 52 -66 Z"
+        />
+      </svg>
       <Nav
         started={started}
         setStarted={setStarted}

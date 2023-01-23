@@ -2,6 +2,7 @@
 .app {
   /* Background Variables */
   --background-color: hsl(191 76% 90%);
+  --blob-color: hsl(203 50% 80% / 0.7);
 
   /* Button Variables */
   --button-background-color: hsl(230 54% 40%);
@@ -32,6 +33,7 @@
 .app.dark--mode {
   /* Dark Background Variables */
   --background-color: hsl(221 70% 16%);
+  --blob-color: hsl(203 50% 80% / 0.1);
 
   /* Dark Button Variables */
   --button-background-color: hsl(240 30% 80%);
@@ -40,7 +42,7 @@
   --button-font-weight: 700;
 
   /* Dark top Button Variables */
-  --icon-color: #e0e1f6;
+  --icon-color: hsl(237 55% 92%);
 
   /* Dark Start Variables */
   --start-title: hsl(231 12% 78%);
@@ -69,6 +71,8 @@ body,
 }
 
 .app {
+  position: relative;
+
   display: flex;
   flex-direction: column;
 
@@ -82,9 +86,9 @@ input {
 }
 
 .loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 
   text-align: center;
   font-family: 'karla';
@@ -93,10 +97,40 @@ input {
   background-color: var(--background-color);
   color: var(--start-title);
 
-  width: 100%;
-  min-height: 100vh;
-
+  transform: translate(-50%, -50%);
   transition: var(--transition-time);
+}
+
+/* Background */
+
+.blobs {
+  position: absolute;
+}
+
+.blobs > path {
+  fill: var(--blob-color);
+  transition: var(--transition-time);
+  scale: 3;
+}
+
+.blob-1 {
+  width: 450px;
+  aspect-ratio: 1;
+}
+
+.blob-1 > path {
+  translate: 10% 40%;
+}
+
+.blob-2 {
+  right: 0;
+  bottom: 0;
+  width: 450px;
+  aspect-ratio: 1;
+}
+
+.blob-2 > path {
+  translate: 70% 65%;
 }
 
 /* Nav Section */
@@ -104,6 +138,8 @@ input {
   display: flex;
 
   padding: 1rem 1rem 0 1rem;
+
+  z-index: 2;
 }
 
 .nav--button {
@@ -190,6 +226,7 @@ input {
   justify-content: center;
 
   transform: translateX(-50%);
+  z-index: 2;
 }
 
 .main--title {
@@ -283,6 +320,8 @@ input {
   text-align: center;
 
   padding: 0 1rem 1rem 1rem;
+
+  z-index: 2;
 }
 
 .questions--question-component {
