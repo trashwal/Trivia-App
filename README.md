@@ -16,14 +16,14 @@ To run the app locally, you can start up the server by running `npm run start` i
 
 ## **Mock-ups**
 
-![](/public/mock-ups/trivia_app_light_mock-up_1.png)
+![](/public/mock-ups/start_light.png)
 
-![](/public/mock-ups/trivia_app_light_mock-up_2.png)
+![](/public/mock-ups/start_dark.png)
 
-![](/public/mock-ups/trivia_app_light_mock-up_3.png)
+![](/public/mock-ups/quiz_light.png)
 
-![](/public/mock-ups/trivia_app_dark_mock-up_1.png)
+![](/public/mock-ups/quiz_dark.png)
 
-![](/public/mock-ups/trivia_app_dark_mock-up_2.png)
+![](/public/mock-ups/results_light.png)
 
-![](/public/mock-ups/trivia_app_dark_mock-up_3.png)
+![](/public/mock-ups/results_dark.png)
