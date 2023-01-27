@@ -63,8 +63,12 @@
 }
 
 /* General */
+
 html,
-body,
+body {
+  overflow-x: hidden;
+}
+
 .app,
 .main--body {
   min-height: 100vh;
@@ -94,7 +98,6 @@ input {
   font-family: 'karla';
   font-size: 1.2rem;
 
-  background-color: var(--background-color);
   color: var(--start-title);
 
   transform: translate(-50%, -50%);
@@ -138,7 +141,7 @@ input {
 
   padding: 1rem 1rem 0 1rem;
 
-  z-index: 2;
+  z-index: 3;
 }
 
 .nav--button {
