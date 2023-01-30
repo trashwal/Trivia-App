@@ -1,12 +1,17 @@
 import { decode } from 'html-entities';
 import { nanoid } from 'nanoid';
 
-export default function Questions(props) {
+export default function Questions({
+  triviaData,
+  userAnswers,
+  pickAnswer,
+  quizFinished,
+}) {
   // creating question components
-  const questionComponent = props.triviaData.map((item, index) => {
+  const questionComponent = triviaData.map((item, index) => {
     // creating question element
     const question = (
-      <h2 className="questions--question">
+      <h2 className="quiz--question">
         {index + 1}. {decode(item.question)}
       </h2>
     );
@@ -16,64 +21,33 @@ export default function Questions(props) {
       const answer = decode(codedAnswer);
       const name = `question${index + 1}`;
       const id = `Q${index + 1}-${answer}`;
-      let classes = 'questions--answer';
+      let classes = 'quiz--answer';
 
-      if (props.quizFinished) {
+      if (quizFinished) {
         if (answer === decode(item.correctAnswer)) {
           classes += ' correct';
-        } else if (answer === props.userAnswers[name]) {
+        } else if (answer === userAnswers[name]) {
           classes += ' wrong';
         }
-      } else if (answer === props.userAnswers[name]) {
+      } else if (answer === userAnswers[name]) {
         classes += ' picked';
       }
 
       return (
         <label key={nanoid()} className={classes} htmlFor={id}>
           {answer}
-          <input type="radio" id={id} name={name} onClick={props.pickAnswer} />
+          <input type="radio" id={id} name={name} onClick={pickAnswer} />
         </label>
       );
     });
 
     return (
-      <div key={nanoid()} className="questions--question-component">
+      <div key={nanoid()} className="quiz--question-component">
         {question}
-        <div className="questions--answers-container">{answers}</div>
+        <div className="quiz--answers-container">{answers}</div>
       </div>
     );
   });
 
-  const correctAnswers = props.triviaData.map((item) =>
-    decode(item.correctAnswer)
-  );
-
-  let correctAnswerCount = 0;
-
-  correctAnswers.map((answer, index) => {
-    return props.userAnswers[`question${index + 1}`] === answer
-      ? correctAnswerCount++
-      : null;
-  });
-
-  const result = (
-    <div className="result">
-      You scored {correctAnswerCount}/{props.config.number} correct answers
-    </div>
-  );
-
-  return (
-    <div className="questions--body">
-      {questionComponent}
-      <div className="result--container">
-        {props.quizFinished && result}
-        <button
-          className="button transition"
-          onClick={props.quizFinished ? props.restartQuiz : props.checkAnswers}
-        >
-          {props.quizFinished ? 'Play Again' : 'Check Answers'}
-        </button>
-      </div>
-    </div>
-  );
+  return <>{questionComponent}</>;
 }

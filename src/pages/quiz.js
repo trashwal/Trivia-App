@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { decode } from 'html-entities';
 import Questions from '../components/questions';
 
 export default function Quiz({
@@ -86,17 +87,43 @@ export default function Quiz({
     });
   }, [triviaData, config.number]);
 
+  /* Results Logic */
+
+  let correctAnswerCount = 0;
+
+  const correctAnswers = triviaData.map((item) => decode(item.correctAnswer));
+
+  correctAnswers.map((answer, index) => {
+    return userAnswers[`question${index + 1}`] === answer
+      ? correctAnswerCount++
+      : null;
+  });
+
+  const result = (
+    <div className="result">
+      You scored {correctAnswerCount}/{config.number} correct answers
+    </div>
+  );
+
   return loading ? (
     loadingScreen
   ) : (
-    <Questions
-      config={config}
-      triviaData={triviaData}
-      userAnswers={userAnswers}
-      pickAnswer={pickAnswer}
-      checkAnswers={checkAnswers}
-      quizFinished={quizFinished}
-      restartQuiz={restartQuiz}
-    />
+    <div className="quiz--body">
+      <Questions
+        triviaData={triviaData}
+        userAnswers={userAnswers}
+        pickAnswer={pickAnswer}
+        quizFinished={quizFinished}
+      />
+      <div className="result--container">
+        {quizFinished && result}
+        <button
+          className="button transition"
+          onClick={quizFinished ? restartQuiz : checkAnswers}
+        >
+          {quizFinished ? 'Play Again' : 'Check Answers'}
+        </button>
+      </div>
+    </div>
   );
 }
