@@ -23,10 +23,10 @@
 
   /* Answer Variables */
   --answer-background-color: hsl(0 0% 100%);
-  --answer-pick: hsl(230 89% 85%);
-  --answer-correct: hsl(116 74% 62%);
-  --answer-wrong: hsl(0 99% 62%);
-  --darkness-filter: 0.55;
+  --answer-pick: hsl(230 89% 84%);
+  --answer-correct: hsl(116 74% 58%);
+  --answer-wrong: hsl(0 99% 70%);
+  --opacity: 0.67;
 
   --transition-time: none;
 }
@@ -57,7 +57,7 @@
   --answer-pick: hsl(230 51% 35%);
   --answer-correct: hsl(120 85% 30%);
   --answer-wrong: hsl(0 83% 45%);
-  --darkness-filter: 0.65;
+  --opacity: 0.5;
 }
 
 .app.loaded {
@@ -65,7 +65,6 @@
 }
 
 /* General */
-
 html,
 body {
   overflow-x: hidden;
@@ -87,8 +86,37 @@ body {
   transition: var(--transition-time);
 }
 
-input {
-  display: none;
+.button {
+  font-family: 'Inter';
+  font-size: 0.75rem;
+  font-weight: var(--button-font-weight);
+
+  background-color: var(--button-background-color);
+  color: var(--button-color);
+
+  width: 120px;
+
+  padding: 12px;
+  border: 0;
+  border-radius: 12px;
+
+  cursor: pointer;
+  transition: var(--transition-time);
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--button-hover);
+
+  outline: none;
+
+  scale: 1.05;
+}
+
+.button:active {
+  background-color: var(--button-hover);
+
+  scale: 0.97;
 }
 
 .loading {
@@ -105,8 +133,11 @@ input {
   transform: translate(-50%, -50%);
 }
 
-/* Background */
+input {
+  display: none;
+}
 
+/* Background */
 .blobs {
   position: absolute;
 
@@ -181,40 +212,6 @@ input {
   font-size: 2rem;
 
   margin-right: 3px;
-}
-
-/* Main Button Section */
-.button {
-  font-family: 'Inter';
-  font-size: 0.75rem;
-  font-weight: var(--button-font-weight);
-
-  background-color: var(--button-background-color);
-  color: var(--button-color);
-
-  width: 120px;
-
-  padding: 12px;
-  border: 0;
-  border-radius: 12px;
-
-  cursor: pointer;
-  transition: var(--transition-time);
-}
-
-.button:hover,
-.button:focus {
-  background-color: var(--button-hover);
-
-  outline: none;
-
-  scale: 1.05;
-}
-
-.button:active {
-  background-color: var(--button-hover);
-
-  scale: 0.97;
 }
 
 /* Start Page */
@@ -378,16 +375,19 @@ input {
   border: 0.09375rem solid;
   border-radius: 14px;
 
-  cursor: pointer;
   transition: var(--transition-time);
 }
 
-.quiz--answer:hover:not(.correct, .wrong),
-.quiz--answer:focus:not(.correct, .wrong) {
+.quiz--answers-container:has(.correct) > :not(.correct) {
+  opacity: var(--opacity);
+}
+
+.quiz--answers-container:not(:has(.correct)) > .quiz--answer:hover,
+.quiz--answer:focus {
   background-color: var(--answer-pick);
 
   border: 0.09375rem solid var(--answer-pick);
-  outline: none;
+  cursor: pointer;
 }
 
 .picked {
@@ -427,7 +427,6 @@ input {
 }
 
 /* Animations */
-
 @keyframes hover-from-top {
   20% {
     translate: 11% 41%;
@@ -467,7 +466,6 @@ input {
 }
 
 /* Queries */
-
 @media (prefers-reduced-motion) {
   .blobs > path {
     animation: none;
