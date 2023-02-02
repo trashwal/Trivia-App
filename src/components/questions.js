@@ -7,16 +7,15 @@ export default function Questions({
   pickAnswer,
   quizFinished,
 }) {
-  // creating question components
+  // creating question component
   const questionComponent = triviaData.map((item, index) => {
-    // creating question element
+    // creating question elements
     const question = (
       <h2 className="quiz--question">
         {index + 1}. {decode(item.question)}
       </h2>
     );
 
-    // creating answer elements
     const answers = item.allAnswers.map((codedAnswer) => {
       const answer = decode(codedAnswer);
       const name = `question${index + 1}`;
@@ -24,6 +23,9 @@ export default function Questions({
       let classes = 'quiz--answer';
 
       if (quizFinished) {
+        if (answer === userAnswers[name]) {
+          classes += ' picked';
+        }
         if (answer === decode(item.correctAnswer)) {
           classes += ' correct';
         } else if (answer === userAnswers[name]) {

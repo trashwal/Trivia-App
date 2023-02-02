@@ -23,9 +23,9 @@
 
   /* Answer Variables */
   --answer-background-color: hsl(0 0% 100%);
-  --answer-pick: hsl(230 89% 84%);
+  --answer-pick: hsl(230 92% 84%);
   --answer-correct: hsl(116 74% 58%);
-  --answer-wrong: hsl(0 99% 70%);
+  --answer-wrong: hsl(0 99% 65%);
   --opacity: 0.67;
 
   --transition-time: none;
@@ -34,7 +34,7 @@
 .app.dark--mode {
   /* Dark Background Variables */
   --background-color: hsl(221 70% 16%);
-  --blob-color: hsl(203 50% 80% / 0.09);
+  --blob-color: hsl(203 50% 80% / 0.1);
 
   /* Dark Button Variables */
   --button-background-color: hsl(240 30% 80%);
@@ -53,7 +53,7 @@
   --question-color: hsl(237 55% 92%);
 
   /* Dark Answer Variables */
-  --answer-background-color: hsl(215 70% 35%);
+  --answer-background-color: hsl(215 70% 38%);
   --answer-pick: hsl(230 51% 35%);
   --answer-correct: hsl(120 85% 30%);
   --answer-wrong: hsl(0 83% 45%);
@@ -378,7 +378,7 @@ input {
   transition: var(--transition-time);
 }
 
-.quiz--answers-container:has(.correct) > :not(.correct) {
+.quiz--answers-container:has(.correct) > :not(.picked, .correct) {
   opacity: var(--opacity);
 }
 
