@@ -15,6 +15,8 @@ export default function Quiz({
 
   const loadingScreen = <div className="loading">Loading...</div>;
 
+  const notFullyAnswered = Object.values(userAnswers).includes('');
+
   /* Functions */
 
   // shuffles items in an array
@@ -38,13 +40,6 @@ export default function Quiz({
       });
     }
     return;
-  }
-
-  // checks correct answers if all questions are answered
-  function checkAnswers() {
-    Object.values(userAnswers).includes('')
-      ? alert('Answer all the questions before checking')
-      : setQuizFinished(true);
   }
 
   /* Effects */
@@ -118,8 +113,9 @@ export default function Quiz({
       <div className="result--container">
         {quizFinished && result}
         <button
-          className="button transition"
-          onClick={quizFinished ? restartQuiz : checkAnswers}
+          className={`button transition ${notFullyAnswered ? 'disabled' : ''}`}
+          disabled={notFullyAnswered}
+          onClick={quizFinished ? restartQuiz : () => setQuizFinished(true)}
         >
           {quizFinished ? 'Play Again' : 'Check Answers'}
         </button>

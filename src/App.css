@@ -119,6 +119,19 @@ body {
   scale: 0.97;
 }
 
+.button.disabled {
+  filter: brightness(0.8);
+  opacity: 0.8;
+  transition: none;
+  cursor: default;
+}
+
+.button.disabled:hover,
+.button.disabled:focus {
+  background-color: var(--button-background-color);
+  scale: 1;
+}
+
 .loading {
   position: absolute;
   top: 50%;
