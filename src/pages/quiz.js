@@ -96,7 +96,7 @@ export default function Quiz({
 
   const result = (
     <div className="result">
-      You scored {correctAnswerCount}/{config.number} correct answers
+      You got {correctAnswerCount}/{config.number} correct answers
     </div>
   );
 
